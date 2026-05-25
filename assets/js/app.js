@@ -189,7 +189,7 @@ function socialMsg(type) {
   window.supabaseClient.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: 'http://127.0.0.1:5500/%EC%BD%94%EB%93%9C%EC%97%B0%EC%8A%B5/signup/index.html',
+      redirectTo: 'https://signup-five-bice.vercel.app',
     },
   })
 }
