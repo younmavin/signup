@@ -224,8 +224,9 @@ async function doSignup() {
     showAlert('signup-alert', '아이디는 영문/숫자 조합 4자 이상이어야 합니다.')
     return
   }
-  if (pw.length < 8) {
-    showAlert('signup-alert', '비밀번호는 8자 이상이어야 합니다.')
+  const pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/
+  if (!pwRegex.test(pw)) {
+    showAlert('signup-alert', '비밀번호는 8자 이상, 영문·숫자·특수문자를 모두 포함해야 합니다.')
     return
   }
   if (pw !== pw2) {
