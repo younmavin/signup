@@ -140,7 +140,7 @@ input {
   color: #111;
   background: #fff;
   outline: none;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 input:focus {
   border-color: #111;
@@ -150,6 +150,13 @@ input::-moz-placeholder {
 }
 input::placeholder {
   color: #bbb;
+}
+input.is-error {
+  border: 1px solid #c0392b;
+  background: #fff8f8;
+}
+input.is-error:focus {
+  border-color: #c0392b;
 }
 
 .pw-wrap {

@@ -9,7 +9,6 @@ $color-gray-4: #bbb;
 $color-border: #e0e0e0;
 $color-bg: #f8f8f8;
 $color-white: #fff;
-
 $color-kakao: #fee500;
 $color-error: #c0392b;
 $color-success: #1e7e34;
@@ -20,7 +19,6 @@ $font-base:
   -apple-system,
   BlinkMacSystemFont,
   sans-serif;
-
 $radius-base: 8px;
 $input-height: 54px;
 $btn-height: 54px;
@@ -39,10 +37,10 @@ input,
 button {
   font-family: 'Paperozi';
 }
+
 // ===================================================
 // Base
 // ===================================================
-
 body {
   font-family: $font-base;
   background: $color-white;
@@ -67,11 +65,10 @@ body {
 }
 
 // ===================================================
-// Header (로그인 화면 타이틀)
+// Header
 // ===================================================
 .hd {
   margin-bottom: 2.5rem;
-
   .tit {
     font-size: 30px;
     font-weight: 800;
@@ -79,7 +76,6 @@ body {
     letter-spacing: -1px;
     line-height: 1.25;
   }
-
   .txt {
     font-size: 14px;
     color: $color-gray-3;
@@ -93,18 +89,16 @@ body {
 // ===================================================
 .screen {
   display: none;
-
   &.active {
     display: block;
   }
 }
 
 // ===================================================
-// Sub screen header (회원가입/찾기 화면)
+// Sub screen header
 // ===================================================
 .sub-hd {
   margin-bottom: 2rem;
-
   .tit {
     font-size: 26px;
     font-weight: 800;
@@ -112,7 +106,6 @@ body {
     letter-spacing: -0.5px;
     margin-bottom: 6px;
   }
-
   .txt {
     font-size: 14px;
     color: $color-gray-3;
@@ -135,7 +128,6 @@ body {
   gap: 6px;
   margin-bottom: 2rem;
   padding: 0;
-
   &:hover {
     opacity: 0.7;
   }
@@ -151,23 +143,19 @@ body {
   margin-bottom: 14px;
   display: none;
   line-height: 1.5;
-
   &.show {
     display: block;
   }
-
   &--error {
     background: #fff0f0;
     color: $color-error;
     border: 1px solid #fcc;
   }
-
   &--success {
     background: #f0fff4;
     color: $color-success;
     border: 1px solid #b2dfdb;
   }
-
   &--info {
     background: $color-bg;
     color: $color-gray-1;
@@ -176,7 +164,7 @@ body {
 }
 
 // ===================================================
-// Fieldset (폼 그룹)
+// Fieldset
 // ===================================================
 fieldset {
   border: none;
@@ -188,8 +176,6 @@ fieldset {
     font-weight: 600;
     color: $color-gray-2;
     margin-bottom: 6px;
-
-    // 로그인 화면에서는 legend 숨김
     #s-login & {
       display: none;
     }
@@ -209,13 +195,26 @@ input {
   color: $color-black;
   background: $color-white;
   outline: none;
-  transition: border-color 0.15s;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 
   &:focus {
     border-color: $color-black;
   }
   &::placeholder {
     color: $color-gray-4;
+  }
+
+  // 유효성 검사 실패 상태
+  &.is-error {
+    border: 1px solid #c0392b;
+
+    background: #fff8f8;
+
+    &:focus {
+      border-color: $color-error;
+    }
   }
 }
 
@@ -224,11 +223,9 @@ input {
 // ===================================================
 .pw-wrap {
   position: relative;
-
   input {
     padding-right: 48px;
   }
-
   .btn-eye {
     position: absolute;
     right: 14px;
@@ -241,7 +238,6 @@ input {
     font-size: 20px;
     line-height: 1;
     padding: 0;
-
     &:hover {
       color: $color-gray-2;
     }
@@ -249,13 +245,12 @@ input {
 }
 
 // ===================================================
-// Verify row (핸드폰 인증)
+// Verify row
 // ===================================================
 .verify-row {
   display: flex;
   gap: 8px;
   align-items: flex-end;
-
   input {
     flex: 1;
   }
@@ -287,7 +282,6 @@ input {
   align-items: center;
   justify-content: center;
   gap: 8px;
-
   &:active {
     opacity: 0.85;
   }
@@ -296,7 +290,6 @@ input {
     background: $color-black;
     color: $color-white;
     margin-top: 8px;
-
     &:hover {
       background: #222;
     }
@@ -321,12 +314,10 @@ input {
   transition:
     background 0.15s,
     color 0.15s;
-
   &:hover {
     background: $color-black;
     color: $color-white;
   }
-
   &:disabled {
     opacity: 0.4;
     cursor: not-allowed;
@@ -334,7 +325,7 @@ input {
 }
 
 // ===================================================
-// Links bar (아이디찾기 | 비밀번호찾기 | 회원가입)
+// Links bar
 // ===================================================
 .links {
   display: flex;
@@ -350,11 +341,9 @@ input {
     cursor: pointer;
     padding: 0 14px;
     position: relative;
-
     &:hover {
       color: $color-black;
     }
-
     & + .btn-link::before {
       content: '';
       position: absolute;
@@ -379,7 +368,6 @@ input {
   color: $color-gray-4;
   font-size: 12px;
   letter-spacing: 0.3px;
-
   &::before,
   &::after {
     content: '';
@@ -409,7 +397,6 @@ input {
     transition:
       transform 0.15s,
       opacity 0.15s;
-
     &:hover {
       transform: scale(1.07);
       opacity: 0.9;
@@ -417,7 +404,6 @@ input {
     &:active {
       transform: scale(0.97);
     }
-
     &--kakao {
       background: $color-kakao;
     }
@@ -429,7 +415,7 @@ input {
 }
 
 // ===================================================
-// Result box (아이디 찾기 결과)
+// Result box
 // ===================================================
 .result-box {
   background: $color-bg;
@@ -438,13 +424,11 @@ input {
   padding: 1.25rem;
   text-align: center;
   margin: 1rem 0;
-
   .lbl {
     font-size: 12px;
     color: $color-gray-3;
     margin-bottom: 6px;
   }
-
   .val {
     font-size: 24px;
     font-weight: 800;
@@ -465,7 +449,6 @@ input {
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
 }
-
 @keyframes spin {
   to {
     transform: rotate(360deg);

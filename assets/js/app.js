@@ -34,6 +34,25 @@ async function hashPw(pw) {
 }
 
 /* ===================================================
+   정규식 규칙
+=================================================== */
+const RULES = {
+  username: /^[a-zA-Z0-9]{4,}$/,
+  password: /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/,
+  name: /^[가-힣a-zA-Z]{2,}$/,
+  phone: /^010-\d{4}-\d{4}$/,
+}
+
+/* ===================================================
+   입력 에러 표시
+=================================================== */
+function setInputError(id, isError) {
+  const el = document.getElementById(id)
+  if (!el) return
+  isError ? el.classList.add('is-error') : el.classList.remove('is-error')
+}
+
+/* ===================================================
    상태 변수
 =================================================== */
 const CODES = {}
@@ -47,6 +66,7 @@ function show(id) {
   document.querySelectorAll('.screen').forEach((s) => s.classList.remove('active'))
   document.getElementById(id).classList.add('active')
   clearAlerts()
+  document.querySelectorAll('input').forEach((el) => el.classList.remove('is-error'))
 
   if (id === 's-findpw') {
     document.getElementById('fp-newpw-section').style.display = 'none'
@@ -156,6 +176,7 @@ function verifyCode(p) {
     document.getElementById(p + '-timer').textContent = ''
     showAlert(alertId(p), '핸드폰 인증이 완료됐습니다.', 'success')
   } else {
+    setInputError(p + '-code', true)
     showAlert(alertId(p), '인증번호가 올바르지 않습니다.')
   }
 }
@@ -172,6 +193,7 @@ function socialMsg(type) {
     },
   })
 }
+
 /* ===================================================
    로그인
 =================================================== */
@@ -188,14 +210,18 @@ async function doLogin() {
     const hashed = await hashPw(pw)
     const r = await sbFetch(`users?username=eq.${encodeURIComponent(username)}&select=id,name,password`)
     if (!r.ok || !r.data || r.data.length === 0) {
+      setInputError('login-id', true)
       showAlert('login-alert', '존재하지 않는 아이디입니다.')
       return
     }
     const user = r.data[0]
     if (user.password !== hashed) {
+      setInputError('login-pw', true)
       showAlert('login-alert', '비밀번호가 올바르지 않습니다.')
       return
     }
+    setInputError('login-id', false)
+    setInputError('login-pw', false)
     showAlert('login-alert', `${user.name}님, 환영합니다! 로그인 성공`, 'success')
     document.getElementById('login-id').value = ''
     document.getElementById('login-pw').value = ''
@@ -221,18 +247,41 @@ async function doSignup() {
     return
   }
   if (username.length < 4 || !/^[a-zA-Z0-9]+$/.test(username)) {
+    setInputError('su-id', true)
     showAlert('signup-alert', '아이디는 영문/숫자 조합 4자 이상이어야 합니다.')
     return
   }
+  setInputError('su-id', false)
+
   const pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/
   if (!pwRegex.test(pw)) {
+    setInputError('su-pw', true)
     showAlert('signup-alert', '비밀번호는 8자 이상, 영문·숫자·특수문자를 모두 포함해야 합니다.')
     return
   }
+  setInputError('su-pw', false)
+
   if (pw !== pw2) {
+    setInputError('su-pw2', true)
     showAlert('signup-alert', '비밀번호가 일치하지 않습니다.')
     return
   }
+  setInputError('su-pw2', false)
+
+  if (!RULES.name.test(name)) {
+    setInputError('su-name', true)
+    showAlert('signup-alert', '올바른 성함을 입력해 주세요.')
+    return
+  }
+  setInputError('su-name', false)
+
+  if (!RULES.phone.test(phone)) {
+    setInputError('su-phone', true)
+    showAlert('signup-alert', '010-0000-0000 형식으로 입력해 주세요.')
+    return
+  }
+  setInputError('su-phone', false)
+
   if (!VERIFIED['su']) {
     showAlert('signup-alert', '핸드폰 인증을 완료해 주세요.')
     return
@@ -242,6 +291,7 @@ async function doSignup() {
   try {
     const check = await sbFetch(`users?username=eq.${encodeURIComponent(username)}&select=id`)
     if (check.data && check.data.length > 0) {
+      setInputError('su-id', true)
       showAlert('signup-alert', '이미 사용 중인 아이디입니다.')
       return
     }
@@ -255,7 +305,10 @@ async function doSignup() {
       showAlert('signup-alert', `${name}님, 회원가입이 완료됐습니다! 로그인해 주세요.`, 'success')
       ;['su-id', 'su-pw', 'su-pw2', 'su-name', 'su-phone', 'su-code'].forEach((id) => {
         const el = document.getElementById(id)
-        if (el) el.value = ''
+        if (el) {
+          el.value = ''
+          el.classList.remove('is-error')
+        }
       })
       document.getElementById('su-code-wrap').style.display = 'none'
       VERIFIED['su'] = false
@@ -309,14 +362,21 @@ async function doResetPw() {
   const username = document.getElementById('fp-id').value.trim()
   const pw = document.getElementById('fp-newpw').value
   const pw2 = document.getElementById('fp-newpw2').value
-  if (pw.length < 8) {
-    showAlert('findpw-alert', '비밀번호는 8자 이상이어야 합니다.')
+
+  const pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/
+  if (!pwRegex.test(pw)) {
+    setInputError('fp-newpw', true)
+    showAlert('findpw-alert', '비밀번호는 8자 이상, 영문·숫자·특수문자를 모두 포함해야 합니다.')
     return
   }
+  setInputError('fp-newpw', false)
+
   if (pw !== pw2) {
+    setInputError('fp-newpw2', true)
     showAlert('findpw-alert', '비밀번호가 일치하지 않습니다.')
     return
   }
+  setInputError('fp-newpw2', false)
 
   setLoading('fp-reset-btn', true, '변경 중...')
   try {
@@ -369,6 +429,39 @@ async function doFindId() {
     setLoading('fi-btn', false, '아이디 찾기')
   }
 }
+
+/* ===================================================
+   blur 시 실시간 유효성 검사
+=================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  const rules = [
+    ['su-id', 'username'],
+    ['su-pw', 'password'],
+    ['su-name', 'name'],
+    ['su-phone', 'phone'],
+    ['fp-id', 'username'],
+    ['fp-name', 'name'],
+    ['fp-phone', 'phone'],
+    ['fp-newpw', 'password'],
+    ['fi-name', 'name'],
+    ['fi-phone', 'phone'],
+  ]
+  rules.forEach(([id, rule]) => {
+    document.getElementById(id)?.addEventListener('blur', () => {
+      const el = document.getElementById(id)
+      if (el?.value) setInputError(id, !RULES[rule].test(el.value))
+    })
+  })
+  // 비밀번호 확인 별도 처리
+  ;['su-pw2', 'fp-newpw2'].forEach((id) => {
+    document.getElementById(id)?.addEventListener('blur', () => {
+      const pwId = id === 'su-pw2' ? 'su-pw' : 'fp-newpw'
+      const pw = document.getElementById(pwId)?.value
+      const pw2 = document.getElementById(id)?.value
+      if (pw2) setInputError(id, pw !== pw2)
+    })
+  })
+})
 
 /* ===================================================
    Enter 키 지원
