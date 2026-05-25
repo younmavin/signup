@@ -1,0 +1,369 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+input,
+button {
+  font-family: "Paperozi";
+}
+
+body {
+  font-family: "Paperozi", "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+  font-size: 16px;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 480px;
+  padding: 3rem 2rem 4rem;
+  border: 1px solid #e7e7e7;
+  border-radius: 30px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.hd {
+  margin-bottom: 2.5rem;
+}
+.hd .tit {
+  font-size: 30px;
+  font-weight: 800;
+  color: #111;
+  letter-spacing: -1px;
+  line-height: 1.25;
+}
+.hd .txt {
+  font-size: 14px;
+  color: #999;
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+.screen {
+  display: none;
+}
+.screen.active {
+  display: block;
+}
+
+.sub-hd {
+  margin-bottom: 2rem;
+}
+.sub-hd .tit {
+  font-size: 26px;
+  font-weight: 800;
+  color: #111;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+.sub-hd .txt {
+  font-size: 14px;
+  color: #999;
+  line-height: 1.6;
+}
+
+.btn-back {
+  background: none;
+  border: none;
+  color: #111;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2rem;
+  padding: 0;
+}
+.btn-back:hover {
+  opacity: 0.7;
+}
+
+.alert {
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 14px;
+  display: none;
+  line-height: 1.5;
+}
+.alert.show {
+  display: block;
+}
+.alert--error {
+  background: #fff0f0;
+  color: #c0392b;
+  border: 1px solid #fcc;
+}
+.alert--success {
+  background: #f0fff4;
+  color: #1e7e34;
+  border: 1px solid #b2dfdb;
+}
+.alert--info {
+  background: #f8f8f8;
+  color: #333;
+  border: 1px solid #e0e0e0;
+}
+
+fieldset {
+  border: none;
+  margin-bottom: 20px;
+}
+fieldset legend {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 6px;
+}
+#s-login fieldset legend {
+  display: none;
+}
+
+input {
+  width: 100%;
+  height: 54px;
+  padding: 0 16px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #111;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.15s;
+}
+input:focus {
+  border-color: #111;
+}
+input::-moz-placeholder {
+  color: #bbb;
+}
+input::placeholder {
+  color: #bbb;
+}
+
+.pw-wrap {
+  position: relative;
+}
+.pw-wrap input {
+  padding-right: 48px;
+}
+.pw-wrap .btn-eye {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #bbb;
+  font-size: 20px;
+  line-height: 1;
+  padding: 0;
+}
+.pw-wrap .btn-eye:hover {
+  color: #555;
+}
+
+.verify-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+.verify-row input {
+  flex: 1;
+}
+
+.timer {
+  font-size: 12px;
+  color: #111;
+  margin-top: 6px;
+}
+
+.btn {
+  width: 100%;
+  height: 54px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.15s;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn:active {
+  opacity: 0.85;
+}
+.btn--primary {
+  background: #111;
+  color: #fff;
+  margin-top: 8px;
+}
+.btn--primary:hover {
+  background: #222;
+}
+.btn--primary:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+.btn-sm {
+  height: 54px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  border: 1.5px solid #111;
+  background: #fff;
+  color: #111;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-sm:hover {
+  background: #111;
+  color: #fff;
+}
+.btn-sm:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.links .btn-link {
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 0 14px;
+  position: relative;
+}
+.links .btn-link:hover {
+  color: #111;
+}
+.links .btn-link + .btn-link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 11px;
+  width: 1px;
+  background: #ddd;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 36px 0 24px;
+  color: #bbb;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+}
+.divider::before, .divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e8e8e8;
+}
+
+.sns-list {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+.sns-list .btn-sns {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s, opacity 0.15s;
+}
+.sns-list .btn-sns:hover {
+  transform: scale(1.07);
+  opacity: 0.9;
+}
+.sns-list .btn-sns:active {
+  transform: scale(0.97);
+}
+.sns-list .btn-sns--kakao {
+  background: #fee500;
+}
+.sns-list .btn-sns--google {
+  background: #fff;
+  border: 1.5px solid #e0e0e0;
+}
+
+.result-box {
+  background: #f8f8f8;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.25rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+.result-box .lbl {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 6px;
+}
+.result-box .val {
+  font-size: 24px;
+  font-weight: 800;
+  color: #111;
+  letter-spacing: 2px;
+}
+
+.spinner {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 480px) {
+  body {
+    align-items: flex-start;
+  }
+  .wrap {
+    padding: 2.5rem 1.25rem 3rem;
+    box-shadow: none;
+    border: none;
+  }
+  .hd .tit {
+    font-size: 26px;
+  }
+}/*# sourceMappingURL=style.css.map */

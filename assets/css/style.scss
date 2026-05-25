@@ -1,0 +1,490 @@
+// ===================================================
+// Variables
+// ===================================================
+$color-black: #111;
+$color-gray-1: #333;
+$color-gray-2: #555;
+$color-gray-3: #999;
+$color-gray-4: #bbb;
+$color-border: #e0e0e0;
+$color-bg: #f8f8f8;
+$color-white: #fff;
+
+$color-kakao: #fee500;
+$color-error: #c0392b;
+$color-success: #1e7e34;
+
+$font-base:
+  'Paperozi',
+  'Pretendard',
+  -apple-system,
+  BlinkMacSystemFont,
+  sans-serif;
+
+$radius-base: 8px;
+$input-height: 54px;
+$btn-height: 54px;
+
+// ===================================================
+// Reset
+// ===================================================
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+input,
+button {
+  font-family: 'Paperozi';
+}
+// ===================================================
+// Base
+// ===================================================
+
+body {
+  font-family: $font-base;
+  background: $color-white;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-black;
+  font-size: 16px;
+}
+
+// ===================================================
+// Layout
+// ===================================================
+.wrap {
+  width: 100%;
+  max-width: 480px;
+  padding: 3rem 2rem 4rem;
+  border: 1px solid #e7e7e7;
+  border-radius: 30px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+// ===================================================
+// Header (로그인 화면 타이틀)
+// ===================================================
+.hd {
+  margin-bottom: 2.5rem;
+
+  .tit {
+    font-size: 30px;
+    font-weight: 800;
+    color: $color-black;
+    letter-spacing: -1px;
+    line-height: 1.25;
+  }
+
+  .txt {
+    font-size: 14px;
+    color: $color-gray-3;
+    margin-top: 10px;
+    line-height: 1.6;
+  }
+}
+
+// ===================================================
+// Screen 전환
+// ===================================================
+.screen {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+// ===================================================
+// Sub screen header (회원가입/찾기 화면)
+// ===================================================
+.sub-hd {
+  margin-bottom: 2rem;
+
+  .tit {
+    font-size: 26px;
+    font-weight: 800;
+    color: $color-black;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+
+  .txt {
+    font-size: 14px;
+    color: $color-gray-3;
+    line-height: 1.6;
+  }
+}
+
+// ===================================================
+// Back button
+// ===================================================
+.btn-back {
+  background: none;
+  border: none;
+  color: $color-black;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2rem;
+  padding: 0;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+// ===================================================
+// Alert
+// ===================================================
+.alert {
+  padding: 12px 14px;
+  border-radius: $radius-base;
+  font-size: 13px;
+  margin-bottom: 14px;
+  display: none;
+  line-height: 1.5;
+
+  &.show {
+    display: block;
+  }
+
+  &--error {
+    background: #fff0f0;
+    color: $color-error;
+    border: 1px solid #fcc;
+  }
+
+  &--success {
+    background: #f0fff4;
+    color: $color-success;
+    border: 1px solid #b2dfdb;
+  }
+
+  &--info {
+    background: $color-bg;
+    color: $color-gray-1;
+    border: 1px solid $color-border;
+  }
+}
+
+// ===================================================
+// Fieldset (폼 그룹)
+// ===================================================
+fieldset {
+  border: none;
+  margin-bottom: 20px;
+
+  legend {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: $color-gray-2;
+    margin-bottom: 6px;
+
+    // 로그인 화면에서는 legend 숨김
+    #s-login & {
+      display: none;
+    }
+  }
+}
+
+// ===================================================
+// Input
+// ===================================================
+input {
+  width: 100%;
+  height: $input-height;
+  padding: 0 16px;
+  border: 1.5px solid $color-border;
+  border-radius: $radius-base;
+  font-size: 15px;
+  color: $color-black;
+  background: $color-white;
+  outline: none;
+  transition: border-color 0.15s;
+
+  &:focus {
+    border-color: $color-black;
+  }
+  &::placeholder {
+    color: $color-gray-4;
+  }
+}
+
+// ===================================================
+// Password wrap
+// ===================================================
+.pw-wrap {
+  position: relative;
+
+  input {
+    padding-right: 48px;
+  }
+
+  .btn-eye {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: $color-gray-4;
+    font-size: 20px;
+    line-height: 1;
+    padding: 0;
+
+    &:hover {
+      color: $color-gray-2;
+    }
+  }
+}
+
+// ===================================================
+// Verify row (핸드폰 인증)
+// ===================================================
+.verify-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+
+  input {
+    flex: 1;
+  }
+}
+
+// ===================================================
+// Timer
+// ===================================================
+.timer {
+  font-size: 12px;
+  color: $color-black;
+  margin-top: 6px;
+}
+
+// ===================================================
+// Buttons
+// ===================================================
+.btn {
+  width: 100%;
+  height: $btn-height;
+  border-radius: $radius-base;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.15s;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  &:active {
+    opacity: 0.85;
+  }
+
+  &--primary {
+    background: $color-black;
+    color: $color-white;
+    margin-top: 8px;
+
+    &:hover {
+      background: #222;
+    }
+    &:disabled {
+      background: $color-gray-3;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.btn-sm {
+  height: $input-height;
+  padding: 0 16px;
+  border-radius: $radius-base;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  border: 1.5px solid $color-black;
+  background: $color-white;
+  color: $color-black;
+  transition:
+    background 0.15s,
+    color 0.15s;
+
+  &:hover {
+    background: $color-black;
+    color: $color-white;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+// ===================================================
+// Links bar (아이디찾기 | 비밀번호찾기 | 회원가입)
+// ===================================================
+.links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+
+  .btn-link {
+    background: none;
+    border: none;
+    color: $color-gray-2;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 0 14px;
+    position: relative;
+
+    &:hover {
+      color: $color-black;
+    }
+
+    & + .btn-link::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 11px;
+      width: 1px;
+      background: #ddd;
+    }
+  }
+}
+
+// ===================================================
+// Divider
+// ===================================================
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 36px 0 24px;
+  color: $color-gray-4;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e8e8e8;
+  }
+}
+
+// ===================================================
+// SNS buttons
+// ===================================================
+.sns-list {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+
+  .btn-sns {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      transform 0.15s,
+      opacity 0.15s;
+
+    &:hover {
+      transform: scale(1.07);
+      opacity: 0.9;
+    }
+    &:active {
+      transform: scale(0.97);
+    }
+
+    &--kakao {
+      background: $color-kakao;
+    }
+    &--google {
+      background: $color-white;
+      border: 1.5px solid $color-border;
+    }
+  }
+}
+
+// ===================================================
+// Result box (아이디 찾기 결과)
+// ===================================================
+.result-box {
+  background: $color-bg;
+  border: 1.5px solid $color-border;
+  border-radius: $radius-base;
+  padding: 1.25rem;
+  text-align: center;
+  margin: 1rem 0;
+
+  .lbl {
+    font-size: 12px;
+    color: $color-gray-3;
+    margin-bottom: 6px;
+  }
+
+  .val {
+    font-size: 24px;
+    font-weight: 800;
+    color: $color-black;
+    letter-spacing: 2px;
+  }
+}
+
+// ===================================================
+// Spinner
+// ===================================================
+.spinner {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: $color-white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ===================================================
+// Responsive
+// ===================================================
+@media (max-width: 480px) {
+  body {
+    align-items: flex-start;
+  }
+  .wrap {
+    padding: 2.5rem 1.25rem 3rem;
+    box-shadow: none;
+    border: none;
+  }
+  .hd .tit {
+    font-size: 26px;
+  }
+}
